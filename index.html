@@ -3,142 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <title>Para Ti 💖</title>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-        overflow: hidden;
-    }
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            overflow: hidden;
+        }
 
-    iframe {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-        z-index: 0;
-        transition: opacity 0.7s ease;
-    }
+        iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 0;
+            transition: opacity 0.7s ease;
+        }
 
-    .pantalla-inicial, .carta, .pagina, .pantalla-final {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        width: 100vw;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        text-align: center;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
+        .pantalla-inicial, .carta, .pagina, .pantalla-final {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            text-align: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
 
-    .oculto {
-        opacity: 0;
-        visibility: hidden;
-    }
+        .oculto {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-    .visible {
-        opacity: 1;
-        visibility: visible;
-    }
+        .visible {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    .glass-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 30px;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        color: #fff;
-        text-align: center;
-        max-width: 500px;
-        cursor: pointer;
-    }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            color: #fff;
+            text-align: center;
+            max-width: 500px;
+            cursor: pointer;
+        }
 
-    .glass-card h1 {
-        font-size: 2.2em;
-        color: #ff6f91;
-        margin: 0;
-    }
+        .glass-card h1 {
+            font-size: 2.2em;
+            color: #ff6f91;
+            margin: 0;
+        }
 
-    .cta-text {
-        display: inline-block;
-        padding: 12px 24px;
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        border-radius: 50px;
-        color: #fff;
-        font-weight: bold;
-        font-size: 1.1em;
-        text-decoration: none;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(5px);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        animation: pulseGlow 2s infinite ease-in-out;
-        margin-top: 20px;
-    }
+        .cta-text {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulseGlow 2s infinite ease-in-out;
+            margin-top: 20px;
+        }
 
-    @keyframes pulseGlow {
-        0% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
-        50% { box-shadow: 0 0 15px rgba(255,255,255,0.7); }
-        100% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
-    }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 0 15px rgba(255,255,255,0.7); }
+            100% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
+        }
 
-    .cta-text:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-    }
+        .cta-text:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
 
-    .fade-in {
-        animation: fadeIn 0.5s ease forwards;
-    }
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
 
-    /* NUEVO DISEÑO DEL CUADRO FINAL */
-    .final-card {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-radius: 30px;
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        padding: 40px;
-        box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
-        color: #fff;
-        max-width: 600px;
-        animation: fadeIn 1s ease forwards;
-    }
+        .final-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 40px;
+            box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
+            color: #fff;
+            max-width: 600px;
+            animation: fadeIn 1s ease forwards;
+        }
 
-    .final-card h1 {
-        font-size: 2.5em;
-        color: #ffc1e3;
-        margin-bottom: 15px;
-    }
+        .final-card h1 {
+            font-size: 2.5em;
+            color: #ffc1e3;
+            margin-bottom: 15px;
+        }
 
-    .final-card p {
-        font-size: 1.3em;
-        color: rgba(255, 255, 255, 0.9);
-    }
-</style>
+        .final-card p {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+        }
 
+        .lado-texto {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30%;
+            padding: 20px;
+            color: #fff;
+            font-size: 1.5em;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
 
+        .lado-texto.izquierda {
+            left: 5%;
+        }
+
+        .lado-texto.derecha {
+            right: 5%;
+        }
+
+        .mostrar {
+            opacity: 1;
+        }
+    </style>
 </head>
+
+
 <body>
 
-    <!-- Fondo Animado con las Flores -->
     <iframe src="purple-flowers.html" id="fondo-actual"></iframe>
 
-    <!-- Pantalla de Bienvenida -->
+    <!-- Pantalla Inicial -->
     <div class="pantalla-inicial visible" id="pantalla-inicial">
         <div class="glass-card">
             <h1>💖 Tengo algo para ti 💖</h1>
@@ -184,14 +212,15 @@
 
     <!-- Pantalla Final -->
     <div class="pantalla-final oculto" id="pantalla-final">
-        <div class="final-card">
+        <div class="final-card" id="cuadro-vuela">
             <h1>🦋 Ahora vuela conmigo 🦋</h1>
-            <p>
-                Todo lo bonito que viste, era solo el comienzo.<br>
-                Las mariposas ahora están aquí para acompañarte, como yo quiero hacerlo siempre.
-            </p>
+            <p id="boton-porcierto" onclick="mostrarFlor()">Por cierto...</p>
         </div>
     </div>
+
+    <!-- Texto Lateral Izquierda y Derecha -->
+    <div id="texto-izquierda" class="lado-texto izquierda">Por el 1 de agosto...</div>
+    <div id="texto-derecha" class="lado-texto derecha">...quería darte esto ✨</div>
 
     <!-- Audio -->
     <audio id="musica" loop>
@@ -211,6 +240,8 @@
             document.getElementById('pagina5')
         ];
         const pantallaFinal = document.getElementById('pantalla-final');
+        const cuadroVuela = document.getElementById('cuadro-vuela');
+        const botonPorCierto = document.getElementById('boton-porcierto');
 
         let paginaActual = -1;
 
@@ -236,20 +267,76 @@
                 paginas[paginaActual].classList.remove('oculto');
                 paginas[paginaActual].classList.add('visible', 'fade-in');
             } else {
-                // Cambiar Fondo a Mariposas
                 fondoActual.style.opacity = '0';
                 setTimeout(() => {
                     fondoActual.src = 'butterfly_2.html';
                     fondoActual.style.opacity = '1';
                 }, 700);
 
-                // Mostrar Pantalla Final
                 pantallaFinal.classList.remove('oculto');
                 pantallaFinal.classList.add('visible', 'fade-in');
             }
         }
+
+function mostrarFlor() {
+    // Ocultar cuadro completo de "Vuela conmigo"
+    document.getElementById('pantalla-final').classList.remove('visible');
+    document.getElementById('pantalla-final').classList.add('oculto');
+
+    // Cambiar fondo a la flor encantada
+    fondoActual.style.opacity = '0';
+    setTimeout(() => {
+        fondoActual.src = 'enchanted flower.html';
+        fondoActual.style.opacity = '1';
+    }, 700);
+
+    // Mostrar textos laterales
+    setTimeout(() => {
+        document.getElementById('texto-izquierda').classList.add('mostrar');
+        document.getElementById('texto-derecha').classList.add('mostrar');
+    }, 1200);
+}
+
     </script>
+
+<script>
+    let longPressTimer;
+    // let musica = document.getElementById('musica');  <-- Ya declarada arriba, no ponerla otra vez.
+
+    const canciones = ['Love.mp3', 'Blue.mp3', 'TerceraCancion.mp3'];
+    let indiceCancion = 0;
+
+    function cambiarMusica() {
+        indiceCancion = (indiceCancion + 1) % canciones.length;
+        musica.pause();
+        musica.src = canciones[indiceCancion];
+        musica.load();
+        musica.play();
+    }
+
+    document.body.addEventListener('mousedown', iniciarLongPress);
+    document.body.addEventListener('mouseup', cancelarLongPress);
+
+    document.body.addEventListener('touchstart', iniciarLongPress);
+    document.body.addEventListener('touchend', cancelarLongPress);
+
+    function iniciarLongPress() {
+        longPressTimer = setTimeout(() => {
+            cambiarMusica();
+        }, 3000); // 3 segundos para cambiar canción
+    }
+
+    function cancelarLongPress() {
+        clearTimeout(longPressTimer);
+    }
+</script>
 </body>
 </html>
+
+
+</body>
+</html>
+
+
 
 
