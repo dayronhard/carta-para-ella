@@ -108,7 +108,6 @@
         .final-card {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
             border: 2px solid rgba(255, 255, 255, 0.4);
             padding: 40px;
@@ -144,29 +143,60 @@
             border-radius: 20px;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 2;
         }
 
-        .lado-texto.izquierda {
-            left: 5%;
+        .lado-texto.izquierda { left: 5%; }
+        .lado-texto.derecha { right: 5%; }
+        .mostrar { opacity: 1; }
+
+        /* Botón Cambiar Música */
+        #btnCambiarMusica {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1em;
+            transition: background 0.3s;
         }
 
-        .lado-texto.derecha {
-            right: 5%;
+        #btnCambiarMusica:hover {
+            background: rgba(255,255,255,0.3);
         }
 
-        .mostrar {
+        /* Texto flotante */
+        #mensajeCambio {
+            position: fixed;
+            top: 60px;
+            right: 30px;
+            color: #fff;
+            font-size: 1em;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 11;
+        }
+
+        #mensajeCambio.visible {
             opacity: 1;
         }
+
     </style>
 </head>
-
-
 <body>
 
     <iframe src="purple-flowers.html" id="fondo-actual"></iframe>
 
-    <!-- Pantalla Inicial -->
+    <!-- Botón de cambiar música -->
+    <button id="btnCambiarMusica" onclick="cambiarMusica()">Cambiar Música 🎶</button>
+    <div id="mensajeCambio">🎶 Canción cambiada</div>
+
+    <!-- Pantallas y Cartas -->
     <div class="pantalla-inicial visible" id="pantalla-inicial">
         <div class="glass-card">
             <h1>💖 Tengo algo para ti 💖</h1>
@@ -174,43 +204,22 @@
         </div>
     </div>
 
-    <!-- Cartas Páginas -->
     <div class="carta oculto pagina" id="pagina1">
-        <div class="glass-card">
-            <h1>Hola, preciosa 💖</h1>
-            <p>Quería regalarte estas palabras con un fondo especial, porque tú eres especial.</p>
-        </div>
+        <div class="glass-card"><h1>Hola, preciosa 💖</h1><p>Quería regalarte estas palabras con un fondo especial.</p></div>
     </div>
-
     <div class="carta oculto pagina" id="pagina2">
-        <div class="glass-card">
-            <h1>🌟 Sabías que...</h1>
-            <p>Desde que te conocí, todo es diferente. Tu sonrisa tiene un poder increíble.</p>
-        </div>
+        <div class="glass-card"><h1>🌟 Sabías que...</h1><p>Desde que te conocí, todo es diferente.</p></div>
     </div>
-
     <div class="carta oculto pagina" id="pagina3">
-        <div class="glass-card">
-            <h1>✨ Siempre quise decirte</h1>
-            <p>Que cada detalle tuyo me inspira, y esta carta es solo un reflejo de eso.</p>
-        </div>
+        <div class="glass-card"><h1>✨ Siempre quise decirte</h1><p>Que cada detalle tuyo me inspira.</p></div>
     </div>
-
     <div class="carta oculto pagina" id="pagina4">
-        <div class="glass-card">
-            <h1>🌸 Eres única</h1>
-            <p>Tu forma de ser, tu luz, todo eso hace que seas inigualable.</p>
-        </div>
+        <div class="glass-card"><h1>🌸 Eres única</h1><p>Tu forma de ser, tu luz, todo eso hace que seas inigualable.</p></div>
     </div>
-
     <div class="carta oculto pagina" id="pagina5">
-        <div class="glass-card">
-            <h1>💖 Gracias por existir</h1>
-            <p>Y permitirme hacerte sonreír, aunque sea un poquito con esta sorpresa.</p>
-        </div>
+        <div class="glass-card"><h1>💖 Gracias por existir</h1><p>Y permitirme hacerte sonreír con esta sorpresa.</p></div>
     </div>
 
-    <!-- Pantalla Final -->
     <div class="pantalla-final oculto" id="pantalla-final">
         <div class="final-card" id="cuadro-vuela">
             <h1>🦋 Ahora vuela conmigo 🦋</h1>
@@ -218,11 +227,9 @@
         </div>
     </div>
 
-    <!-- Texto Lateral Izquierda y Derecha -->
     <div id="texto-izquierda" class="lado-texto izquierda">Por el 1 de agosto...</div>
     <div id="texto-derecha" class="lado-texto derecha">...quería darte esto ✨</div>
 
-    <!-- Audio -->
     <audio id="musica" loop>
         <source src="Love.mp3" type="audio/mpeg">
         Tu navegador no soporta audio.
@@ -232,18 +239,14 @@
         const pantallaInicial = document.getElementById('pantalla-inicial');
         const musica = document.getElementById('musica');
         const fondoActual = document.getElementById('fondo-actual');
-        const paginas = [
-            document.getElementById('pagina1'),
-            document.getElementById('pagina2'),
-            document.getElementById('pagina3'),
-            document.getElementById('pagina4'),
-            document.getElementById('pagina5')
-        ];
+        const paginas = [document.getElementById('pagina1'), document.getElementById('pagina2'), document.getElementById('pagina3'), document.getElementById('pagina4'), document.getElementById('pagina5')];
         const pantallaFinal = document.getElementById('pantalla-final');
         const cuadroVuela = document.getElementById('cuadro-vuela');
-        const botonPorCierto = document.getElementById('boton-porcierto');
+        const mensajeCambio = document.getElementById('mensajeCambio');
 
         let paginaActual = -1;
+        let canciones = ['Love.mp3', 'Blue.mp3', 'Hear.mp3'];
+        let indiceCancion = 0;
 
         pantallaInicial.addEventListener('click', () => {
             pantallaInicial.classList.remove('visible');
@@ -272,71 +275,37 @@
                     fondoActual.src = 'butterfly_2.html';
                     fondoActual.style.opacity = '1';
                 }, 700);
-
                 pantallaFinal.classList.remove('oculto');
                 pantallaFinal.classList.add('visible', 'fade-in');
             }
         }
 
-function mostrarFlor() {
-    // Ocultar cuadro completo de "Vuela conmigo"
-    document.getElementById('pantalla-final').classList.remove('visible');
-    document.getElementById('pantalla-final').classList.add('oculto');
+        function mostrarFlor() {
+            fondoActual.style.opacity = '0';
+            setTimeout(() => {
+                fondoActual.src = 'enchanted flower.html';
+                fondoActual.style.opacity = '1';
+            }, 700);
+            pantallaFinal.classList.add('oculto');
+            cuadroVuela.classList.add('oculto');
+            document.getElementById('texto-izquierda').classList.add('mostrar');
+            document.getElementById('texto-derecha').classList.add('mostrar');
+        }
 
-    // Cambiar fondo a la flor encantada
-    fondoActual.style.opacity = '0';
-    setTimeout(() => {
-        fondoActual.src = 'enchanted flower.html';
-        fondoActual.style.opacity = '1';
-    }, 700);
+        function cambiarMusica() {
+            indiceCancion = (indiceCancion + 1) % canciones.length;
+            musica.src = canciones[indiceCancion];
+            musica.play();
 
-    // Mostrar textos laterales
-    setTimeout(() => {
-        document.getElementById('texto-izquierda').classList.add('mostrar');
-        document.getElementById('texto-derecha').classList.add('mostrar');
-    }, 1200);
-}
-
+            // Mostrar texto flotante de feedback
+            mensajeCambio.classList.add('visible');
+            setTimeout(() => {
+                mensajeCambio.classList.remove('visible');
+            }, 1500);
+        }
     </script>
 
-<script>
-    let longPressTimer;
-    // let musica = document.getElementById('musica');  <-- Ya declarada arriba, no ponerla otra vez.
-
-    const canciones = ['Love.mp3', 'Blue.mp3', 'TerceraCancion.mp3'];
-    let indiceCancion = 0;
-
-    function cambiarMusica() {
-        indiceCancion = (indiceCancion + 1) % canciones.length;
-        musica.pause();
-        musica.src = canciones[indiceCancion];
-        musica.load();
-        musica.play();
-    }
-
-    document.body.addEventListener('mousedown', iniciarLongPress);
-    document.body.addEventListener('mouseup', cancelarLongPress);
-
-    document.body.addEventListener('touchstart', iniciarLongPress);
-    document.body.addEventListener('touchend', cancelarLongPress);
-
-    function iniciarLongPress() {
-        longPressTimer = setTimeout(() => {
-            cambiarMusica();
-        }, 3000); // 3 segundos para cambiar canción
-    }
-
-    function cancelarLongPress() {
-        clearTimeout(longPressTimer);
-    }
-</script>
 </body>
 </html>
-
-
-</body>
-</html>
-
-
 
 
