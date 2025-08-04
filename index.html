@@ -26,9 +26,10 @@
         p {
             font-size: 1.2em;
         }
-        audio {
+        .instruccion {
             margin-top: 20px;
-            display: none;
+            font-size: 0.9em;
+            color: #555;
         }
     </style>
 </head>
@@ -36,21 +37,22 @@
     <div class="carta">
         <h1>Hola, preciosa 💖</h1>
         <p>
-            Solo quería enviarte unas palabras que suenen tan bonitas como tú.<br>
-            Eres especial y mereces sonrisas todos los días.<br>
-            Espero que disfrutes este pequeño detalle que hice pensando en ti.
+            Quería regalarte estas palabras con un fondo especial, porque tú eres especial.<br>
+            Espero que esta melodía te acompañe mientras lees esto y sonríes.
+        </p>
+        <p class="instruccion">
+            (Toca en cualquier parte de la pantalla si no escuchas la música)
         </p>
     </div>
 
-    <audio autoplay loop>
+    <audio id="musica" loop>
         <source src="Love.mp3" type="audio/mpeg">
         Tu navegador no soporta audio.
     </audio>
 
     <script>
-        // Autoplay en algunos móviles necesita interacción:
         document.body.addEventListener('click', function() {
-            const audio = document.querySelector('audio');
+            const audio = document.getElementById('musica');
             if (audio.paused) {
                 audio.play();
             }
@@ -58,3 +60,5 @@
     </script>
 </body>
 </html>
+
+
