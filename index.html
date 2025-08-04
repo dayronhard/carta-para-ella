@@ -105,6 +105,16 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-out {
+    animation: fadeOut 1s forwards;
+}
+
+
         .final-card {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(20px);
@@ -199,36 +209,40 @@
     <!-- Pantallas y Cartas -->
     <div class="pantalla-inicial visible" id="pantalla-inicial">
         <div class="glass-card">
-            <h1>💖 Tengo algo para ti 💖</h1>
-            <p class="cta-text">✨ Toca aquí para comenzar ✨</p>
+            <h1>Tengo algo para ti 
+                Shar 💖</h1>
+            <p class="cta-text">✨ Presiona la pantalla ✨</p>
         </div>
     </div>
 
     <div class="carta oculto pagina" id="pagina1">
-        <div class="glass-card"><h1>Hola, preciosa 💖</h1><p>Quería regalarte estas palabras con un fondo especial.</p></div>
+        <div class="glass-card"><h1>Oa, Shar 💖</h1><p>Te mando esto porque queria regalarte unas palabras y el detalle en si "(demoré bastante)" .</p></div>
     </div>
     <div class="carta oculto pagina" id="pagina2">
-        <div class="glass-card"><h1>🌟 Sabías que...</h1><p>Desde que te conocí, todo es diferente.</p></div>
+        <div class="glass-card"><h1>🌟 Sin buscarlo, sucedio</h1><p>Desde que te conocí, nunca imaginé cómo se desarrollarían las cosas. No era algo que estuviera buscando, y sé que tú tampoco. Pero aún así, aquí estamos, y te aseguro que no cambiaría nada de lo que hemos vivido.</p></div>
     </div>
     <div class="carta oculto pagina" id="pagina3">
-        <div class="glass-card"><h1>✨ Siempre quise decirte</h1><p>Que cada detalle tuyo me inspira.</p></div>
+        <div class="glass-card"><h1>Lo he intentado antes</h1><p>Esta es la segunda vez que intento decirte algo importante. La primera vez... bueno ya sabemos como fue, pero no quiero quedarme con las palabras guardadas otra vez.</p></div>
     </div>
     <div class="carta oculto pagina" id="pagina4">
-        <div class="glass-card"><h1>🌸 Eres única</h1><p>Tu forma de ser, tu luz, todo eso hace que seas inigualable.</p></div>
+        <div class="glass-card"><h1>🌷 Quiero que lo sepas</h1><p>Me gustas, Shar. No es algo de ahora, es algo que siento desde hace tiempo, tal vez no sea el momento más perfecto, pero es el momento más sincero que puedo darte.</p></div>
     </div>
     <div class="carta oculto pagina" id="pagina5">
-        <div class="glass-card"><h1>💖 Gracias por existir</h1><p>Y permitirme hacerte sonreír con esta sorpresa.</p></div>
+        <div class="glass-card"><h1>❤️ Shar</h1><p>No sé por lo que estás pasando últimamente, si te sientes bien o si algo te preocupa. Pero quiero que sepas que puedes contar conmigo. No tienes que responderme ahora ni sentirte presionada. Esto es solo mi forma de abrirte el corazón y decirte que estaré aquí, sin importar qué.</p></div>
+    </div>
+    <div class="carta oculto pagina" id="pagina6">
+        <div class="glass-card"><h1>🌸 Pase lo que pase, estoy aquí</h1><p>Gracias por ser tú, Shar. Si estas palabras lograron sacarte una sonrisa, para mí ya todo valió la pena.</p></div>
     </div>
 
     <div class="pantalla-final oculto" id="pantalla-final">
         <div class="final-card" id="cuadro-vuela">
             <h1>🦋 Ahora vuela conmigo 🦋</h1>
-            <p id="boton-porcierto" onclick="mostrarFlor()">Por cierto...</p>
+            <p id="boton-porcierto" onclick="mostrarFlor()">Por cierto...antes de presionar la pantalla de nuevo ve un rato las mariposas</p>
         </div>
     </div>
 
-    <div id="texto-izquierda" class="lado-texto izquierda">Por el 1 de agosto...</div>
-    <div id="texto-derecha" class="lado-texto derecha">...quería darte esto ✨</div>
+    <div id="texto-izquierda" class="lado-texto izquierda">No acabe antes, pero por el 1 de agosto...</div>
+    <div id="texto-derecha" class="lado-texto derecha">...quería darte esto, espero poder darte unas de verdad✨</div>
 
     <audio id="musica" loop>
         <source src="Love.mp3" type="audio/mpeg">
@@ -239,10 +253,13 @@
         const pantallaInicial = document.getElementById('pantalla-inicial');
         const musica = document.getElementById('musica');
         const fondoActual = document.getElementById('fondo-actual');
-        const paginas = [document.getElementById('pagina1'), document.getElementById('pagina2'), document.getElementById('pagina3'), document.getElementById('pagina4'), document.getElementById('pagina5')];
+        const paginas = [document.getElementById('pagina1'), document.getElementById('pagina2'), document.getElementById('pagina3'), document.getElementById('pagina4'), document.getElementById('pagina5'), document.getElementById('pagina6')];
         const pantallaFinal = document.getElementById('pantalla-final');
         const cuadroVuela = document.getElementById('cuadro-vuela');
         const mensajeCambio = document.getElementById('mensajeCambio');
+        const textoIzquierda = document.getElementById('texto-izquierda');
+    const textoDerecha = document.getElementById('texto-derecha');
+
 
         let paginaActual = -1;
         let canciones = ['Love.mp3', 'Blue.mp3', 'Hear.mp3'];
@@ -280,18 +297,36 @@
             }
         }
 
-        function mostrarFlor() {
-            fondoActual.style.opacity = '0';
-            setTimeout(() => {
-                fondoActual.src = 'enchanted flower.html';
-                fondoActual.style.opacity = '1';
-            }, 700);
-            pantallaFinal.classList.add('oculto');
-            cuadroVuela.classList.add('oculto');
-            document.getElementById('texto-izquierda').classList.add('mostrar');
-            document.getElementById('texto-derecha').classList.add('mostrar');
-        }
+function mostrarFlor() {
+    fondoActual.style.opacity = '0';
+    setTimeout(() => {
+        fondoActual.src = 'enchanted flower.html';
+        fondoActual.style.opacity = '1';
+    }, 700);
 
+    pantallaFinal.classList.add('oculto');
+    cuadroVuela.classList.add('oculto');
+
+    textoIzquierda.classList.add('mostrar');
+    textoDerecha.classList.add('mostrar');
+
+    // Después de 10 segundos, hacer fade-out y ocultar
+    setTimeout(() => {
+        textoIzquierda.classList.add('fade-out');
+        textoDerecha.classList.add('fade-out');
+
+        // Luego de que termine la animación (1s), ocultarlos completamente
+        setTimeout(() => {
+            textoIzquierda.classList.remove('mostrar', 'fade-out');
+            textoIzquierda.classList.add('oculto');
+            textoDerecha.classList.remove('mostrar', 'fade-out');
+            textoDerecha.classList.add('oculto');
+        }, 1000); // Espera a que termine la animación fade-out (1s)
+    }, 10000); // Espera 10 segundos antes de iniciar el fade-out
+}
+
+
+        
         function cambiarMusica() {
             indiceCancion = (indiceCancion + 1) % canciones.length;
             musica.src = canciones[indiceCancion];
