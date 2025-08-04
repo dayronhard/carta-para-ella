@@ -3,111 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <title>Para Ti 💖</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            overflow: hidden;
-        }
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        overflow: hidden;
+    }
 
-        iframe {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            z-index: 0;
-        }
+    iframe {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        z-index: 0;
+        transition: opacity 0.7s ease;
+    }
 
-        .pantalla-inicial, .carta {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
+    .pantalla-inicial, .carta, .pagina, .pantalla-final {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        text-align: center;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
 
-        .oculto {
-            opacity: 0;
-            visibility: hidden;
-        }
+    .oculto {
+        opacity: 0;
+        visibility: hidden;
+    }
 
-        .visible {
-            opacity: 1;
-            visibility: visible;
-        }
+    .visible {
+        opacity: 1;
+        visibility: visible;
+    }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            color: #fff;
-            text-align: center;
-            max-width: 500px;
-        }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 30px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        color: #fff;
+        text-align: center;
+        max-width: 500px;
+        cursor: pointer;
+    }
 
-        .glass-card h1 {
-            font-size: 2.2em;
-            color: #ff6f91;
-            margin: 0;
-        }
+    .glass-card h1 {
+        font-size: 2.2em;
+        color: #ff6f91;
+        margin: 0;
+    }
 
-        .glass-card p {
-            font-size: 1.1em;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 10px;
-        }
+    .cta-text {
+        display: inline-block;
+        padding: 12px 24px;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        border-radius: 50px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.1em;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(5px);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        animation: pulseGlow 2s infinite ease-in-out;
+        margin-top: 20px;
+    }
 
-        .carta-content {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
-            color: #fff;
-            max-width: 500px;
-            text-align: center;
-        }
+    @keyframes pulseGlow {
+        0% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
+        50% { box-shadow: 0 0 15px rgba(255,255,255,0.7); }
+        100% { box-shadow: 0 0 5px rgba(255,255,255,0.3); }
+    }
 
-        .carta-content h1 {
-            font-size: 2.2em;
-            color: #ff6f91;
-        }
+    .cta-text:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    }
 
-        .carta-content p {
-            font-size: 1.2em;
-            color: rgba(255, 255, 255, 0.9);
-        }
-    </style>
+    .fade-in {
+        animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    /* NUEVO DISEÑO DEL CUADRO FINAL */
+    .final-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 30px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        padding: 40px;
+        box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
+        color: #fff;
+        max-width: 600px;
+        animation: fadeIn 1s ease forwards;
+    }
+
+    .final-card h1 {
+        font-size: 2.5em;
+        color: #ffc1e3;
+        margin-bottom: 15px;
+    }
+
+    .final-card p {
+        font-size: 1.3em;
+        color: rgba(255, 255, 255, 0.9);
+    }
+</style>
+
+
 </head>
 <body>
 
     <!-- Fondo Animado con las Flores -->
-    <iframe src="purple-flowers.html"></iframe>
+    <iframe src="purple-flowers.html" id="fondo-actual"></iframe>
 
     <!-- Pantalla de Bienvenida -->
     <div class="pantalla-inicial visible" id="pantalla-inicial">
         <div class="glass-card">
             <h1>💖 Tengo algo para ti 💖</h1>
-            <p>Toca aquí para comenzar</p>
+            <p class="cta-text">✨ Toca aquí para comenzar ✨</p>
         </div>
     </div>
 
-    <!-- Carta Oculta -->
-    <div class="carta oculto" id="carta">
-        <div class="carta-content">
+    <!-- Cartas Páginas -->
+    <div class="carta oculto pagina" id="pagina1">
+        <div class="glass-card">
             <h1>Hola, preciosa 💖</h1>
+            <p>Quería regalarte estas palabras con un fondo especial, porque tú eres especial.</p>
+        </div>
+    </div>
+
+    <div class="carta oculto pagina" id="pagina2">
+        <div class="glass-card">
+            <h1>🌟 Sabías que...</h1>
+            <p>Desde que te conocí, todo es diferente. Tu sonrisa tiene un poder increíble.</p>
+        </div>
+    </div>
+
+    <div class="carta oculto pagina" id="pagina3">
+        <div class="glass-card">
+            <h1>✨ Siempre quise decirte</h1>
+            <p>Que cada detalle tuyo me inspira, y esta carta es solo un reflejo de eso.</p>
+        </div>
+    </div>
+
+    <div class="carta oculto pagina" id="pagina4">
+        <div class="glass-card">
+            <h1>🌸 Eres única</h1>
+            <p>Tu forma de ser, tu luz, todo eso hace que seas inigualable.</p>
+        </div>
+    </div>
+
+    <div class="carta oculto pagina" id="pagina5">
+        <div class="glass-card">
+            <h1>💖 Gracias por existir</h1>
+            <p>Y permitirme hacerte sonreír, aunque sea un poquito con esta sorpresa.</p>
+        </div>
+    </div>
+
+    <!-- Pantalla Final -->
+    <div class="pantalla-final oculto" id="pantalla-final">
+        <div class="final-card">
+            <h1>🦋 Ahora vuela conmigo 🦋</h1>
             <p>
-                Quería regalarte estas palabras con un fondo especial, porque tú eres especial.<br>
-                Espero que esta melodía te acompañe mientras lees esto y sonríes.
+                Todo lo bonito que viste, era solo el comienzo.<br>
+                Las mariposas ahora están aquí para acompañarte, como yo quiero hacerlo siempre.
             </p>
         </div>
     </div>
@@ -120,18 +201,53 @@
 
     <script>
         const pantallaInicial = document.getElementById('pantalla-inicial');
-        const carta = document.getElementById('carta');
         const musica = document.getElementById('musica');
+        const fondoActual = document.getElementById('fondo-actual');
+        const paginas = [
+            document.getElementById('pagina1'),
+            document.getElementById('pagina2'),
+            document.getElementById('pagina3'),
+            document.getElementById('pagina4'),
+            document.getElementById('pagina5')
+        ];
+        const pantallaFinal = document.getElementById('pantalla-final');
+
+        let paginaActual = -1;
 
         pantallaInicial.addEventListener('click', () => {
             pantallaInicial.classList.remove('visible');
             pantallaInicial.classList.add('oculto');
-
-            carta.classList.remove('oculto');
-            carta.classList.add('visible');
-
+            mostrarSiguientePagina();
             musica.play();
         });
+
+        paginas.forEach(pagina => {
+            pagina.addEventListener('click', mostrarSiguientePagina);
+        });
+
+        function mostrarSiguientePagina() {
+            if (paginaActual >= 0) {
+                paginas[paginaActual].classList.remove('visible');
+                paginas[paginaActual].classList.add('oculto');
+            }
+
+            paginaActual++;
+            if (paginaActual < paginas.length) {
+                paginas[paginaActual].classList.remove('oculto');
+                paginas[paginaActual].classList.add('visible', 'fade-in');
+            } else {
+                // Cambiar Fondo a Mariposas
+                fondoActual.style.opacity = '0';
+                setTimeout(() => {
+                    fondoActual.src = 'butterfly_2.html';
+                    fondoActual.style.opacity = '1';
+                }, 700);
+
+                // Mostrar Pantalla Final
+                pantallaFinal.classList.remove('oculto');
+                pantallaFinal.classList.add('visible', 'fade-in');
+            }
+        }
     </script>
 </body>
 </html>
